@@ -1,12 +1,3 @@
-# syntax=docker/dockerfile:1
-# check=error=true
-
-# This Dockerfile is designed for production, not development. Use with Kamal or build'n'run by hand:
-# docker build -t banking_gateway_ruby .
-# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name banking_gateway_ruby banking_gateway_ruby
-
-# For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
-
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
 ARG RUBY_VERSION=3.3.6
 FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
@@ -44,9 +35,6 @@ COPY . .
 
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
-
-
-
 
 # Final stage for app image
 FROM base

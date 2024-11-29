@@ -1,6 +1,6 @@
-require_relative "boot"
+require_relative 'boot'
 
-require "rails/all"
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -28,5 +28,15 @@ module BankingGatewayRuby
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # Rails generate files
+    config.generators do |g|
+      g.test_framework nil
+      g.helper false
+      g.system_tests false
+      g.jbuilder false
+      g.assets false
+      g.decorator false
+    end
   end
 end
