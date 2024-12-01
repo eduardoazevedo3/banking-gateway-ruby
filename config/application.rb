@@ -11,6 +11,10 @@ module BankingGatewayRuby
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.0
 
+    # Timezone and locale configuration
+    config.time_zone = 'Brasilia'
+    config.i18n.default_locale = 'pt-BR'
+
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
@@ -25,8 +29,6 @@ module BankingGatewayRuby
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Only loads a smaller set of middleware suitable for API only apps.
-    # Middleware like session, flash, cookies can be added back manually.
-    # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
     # Rails generate files
@@ -38,5 +40,14 @@ module BankingGatewayRuby
       g.assets false
       g.decorator false
     end
+
+    # CSP configuration
+    config.action_dispatch.default_headers.merge!({
+      'X-Frame-Options' => 'DENY',
+      'X-XSS-Protection' => '1; mode=block'
+    })
+
+    # Load extra directories
+    # config.autoload_paths << config.root.join('app/services')
   end
 end

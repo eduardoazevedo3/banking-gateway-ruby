@@ -1,0 +1,46 @@
+### Create Boleto
+
+POST http://localhost:3000/v1/boletos HTTP/1.1
+content-type: application/json
+account-id: 1
+
+{
+  "accountId": 1,
+  "covenantId": "001-123456-10",
+  "ourNumber": "1234591",
+  "referenceCode": "123567",
+  "issuingBank": "BANCO_BRASIL",
+  "issueData": {
+    "modalityCode": "1",
+    "walletNumber": "17",
+    "agreementNumber": "3128557",
+    "walletVariationNumber": "35"
+  },
+  "issueDate": "2024-08-09",
+  "dueDate": "2024-09-20",
+  "amount": "100.00",
+  "discountAmount": "0",
+  "fineAmount": "0",
+  "interestAmount": "0",
+  "boletoTypeCode": 1,
+  "boletoTypeDescription": "Duplicata Mercantil",
+  "beneficiaryType": "CNPJ",
+  "beneficiaryDocument": "90.890.230/0001-66",
+  "beneficiaryName": "Sacador Cobrancas S.A",
+  "payerType": "CPF",
+  "payerDocument": "863.829.147-70",
+  "payerName": "Jose da Silva",
+  "payerAddress": "Rua das Flores",
+  "payerAddressNumber": "123",
+  "payerZipCode": "14340-000",
+  "payerCity": "Brodowski",
+  "payerNeighborhood": "Centro",
+  "payerState": "SP",
+  "payerPhone": "(11) 91234-0192"
+}
+
+### Boleto Register
+
+GET http://localhost:3000/v1/boletos/1/register HTTP/1.1
+content-type: application/json
+account-id: 1

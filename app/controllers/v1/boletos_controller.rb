@@ -1,4 +1,4 @@
-class Api::V1::BoletosController < ApplicationController
+class V1::BoletosController < ApplicationController
   before_action :set_boleto, only: %i[ show update destroy ]
 
   # GET /api/v1/boletos

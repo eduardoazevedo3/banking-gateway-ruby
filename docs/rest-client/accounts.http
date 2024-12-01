@@ -1,0 +1,27 @@
+### Create Account
+
+POST http://localhost:3000/v1/accounts HTTP/1.1
+content-type: application/json
+
+{
+  "description": "Sacador Cobrancas S.A",
+  "documentType": "CPF",
+  "documentNumber": "123.456.789-09",
+  "credentials": "{\"appKey\":\"A001\",\"clientId\":\"1234\",\"clientSecret\":\"abc1234\"}"
+}
+
+### Update Account
+
+PATCH http://localhost:3000/v1/accounts/1 HTTP/1.1
+content-type: application/json
+
+{
+  "description": "Sacador Cobrancas S.A",
+  "documentType": "CPF",
+  "documentNumber": "123.456.789-09"
+}
+
+### Delete Account
+
+DELETE http://localhost:3000/v1/accounts/2 HTTP/1.1
+content-type: application/json
