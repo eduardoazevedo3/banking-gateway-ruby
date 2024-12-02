@@ -13,7 +13,7 @@ module BankingGatewayRuby
 
     # Timezone and locale configuration
     config.time_zone = 'Brasilia'
-    config.i18n.default_locale = 'pt-BR'
+    # config.i18n.default_locale = 'pt-BR'
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
@@ -48,6 +48,6 @@ module BankingGatewayRuby
     })
 
     # Load extra directories
-    # config.autoload_paths << config.root.join('app/services')
+    config.autoload_paths << config.root.join('app/validators')
   end
 end

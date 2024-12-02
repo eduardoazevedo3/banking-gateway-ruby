@@ -16,9 +16,10 @@ class V1::BoletosController < ApplicationController
   # POST /api/v1/boletos
   def create
     @boleto = Boleto.new(boleto_params)
+    @boleto.account = current_account
 
     if @boleto.save
-      render json: @boleto, status: :created, location: @boleto
+      render json: @boleto, status: :created
     else
       render json: @boleto.errors, status: :unprocessable_entity
     end
@@ -39,16 +40,47 @@ class V1::BoletosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_boleto
-      @boleto = Boleto.find_by!(
-        account_id: current_account.id,
-        id: params[:id]
-      )
-    end
 
-    # Only allow a list of trusted parameters through.
-    def boleto_params
-      params.fetch(:boleto, {})
-    end
+  def set_boleto
+    @boleto = Boleto.find_by!(
+      account_id: current_account.id,
+      id: params[:id]
+    )
+  end
+
+  def boleto_params
+    params.require(:boleto).permit(
+      :covenant_id,
+      :reference_code,
+      :our_number,
+      :issuing_bank,
+      :issue_date,
+      :due_date,
+      :amount,
+      :discount_amount,
+      :fine_amount,
+      :interest_amount,
+      :fee_amount,
+      :protest_days,
+      :negativation_days,
+      :negativation_agency,
+      :receipt_days_limit,
+      :boleto_type_code,
+      :boleto_type_description,
+      :beneficiary_type,
+      :beneficiary_document,
+      :beneficiary_name,
+      :payer_type,
+      :payer_document,
+      :payer_name,
+      :payer_address,
+      :payer_address_number,
+      :payer_zip_code,
+      :payer_city,
+      :payer_neighborhood,
+      :payer_state,
+      :payer_phone,
+      issue_data: {}
+    )
+  end
 end

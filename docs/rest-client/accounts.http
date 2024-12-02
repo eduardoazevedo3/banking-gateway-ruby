@@ -4,9 +4,10 @@ POST http://localhost:3000/v1/accounts HTTP/1.1
 content-type: application/json
 
 {
+  "provider_account_id": 1,
   "description": "Sacador Cobrancas S.A",
-  "documentType": "CPF",
-  "documentNumber": "123.456.789-09",
+  "document_type": "CPF",
+  "document_number": "123.456.789-09",
   "credentials": "{\"appKey\":\"A001\",\"clientId\":\"1234\",\"clientSecret\":\"abc1234\"}"
 }
 
@@ -17,8 +18,8 @@ content-type: application/json
 
 {
   "description": "Sacador Cobrancas S.A",
-  "documentType": "CPF",
-  "documentNumber": "123.456.789-09"
+  "document_type": "CPF",
+  "document_number": "123.456.789-09"
 }
 
 ### Delete Account

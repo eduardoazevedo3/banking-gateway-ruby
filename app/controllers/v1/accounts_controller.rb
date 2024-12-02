@@ -15,7 +15,7 @@ class V1::AccountsController < ApplicationController
     @account = Account.new(account_params)
 
     if @account.save
-      render json: @account, status: :created, location: @account
+      render json: @account, status: :created
     else
       render json: @account.errors, status: :unprocessable_entity
     end
