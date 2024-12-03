@@ -1,13 +1,13 @@
 class Boleto < ApplicationRecord
-  BOLETO_STATUS_ENUM = %w[
+  BOLETO_STATUS = %w[
     PENDING REGISTERING FAILED OPENED
     PAID CANCELED EXPIRED REJECTED
   ].freeze
 
-  NEGATIVATION_AGENCY_ENUM = %w[ SERASA ].freeze
-  ISSUING_BANK_ENUM = %w[ BANCO_BRASIL ].freeze
-  DOCUMENT_TYPE_ENUM = %w[ CPF CNPJ ].freeze
-  BOLETO_TYPE_CODE_ENUM = {
+  NEGATIVATION_AGENCIES = %w[ SERASA ].freeze
+  ISSUING_BANKS = %w[ BANCO_BRASIL ].freeze
+  DOCUMENT_TYPES = %w[ CPF CNPJ ].freeze
+  BOLETO_TYPE_CODES = {
     CHEQUE: '1',
     MERCANTILE_DUPLICATE: '2',
     MERCANTILE_DUPLICATE_BY_INDICATION: '3',
@@ -44,8 +44,8 @@ class Boleto < ApplicationRecord
   validates :covenant_id, presence: true, length: { maximum: 64 }
   validates :reference_code, length: { maximum: 64 }, format: { with: REGEX_NUMBER_WITH_DOTS }, uniqueness: { scope: :account_id }
   validates :our_number, presence: true, length: { maximum: 64 }, uniqueness: { scope: %i[ covenant_id account_id ] }
-  validates :status, presence: true, length: { maximum: 50 }, inclusion: { in: BOLETO_STATUS_ENUM }
-  validates :issuing_bank, presence: true, length: { maximum: 50 }, inclusion: { in: ISSUING_BANK_ENUM }
+  validates :status, presence: true, length: { maximum: 50 }, inclusion: { in: BOLETO_STATUS }
+  validates :issuing_bank, presence: true, length: { maximum: 50 }, inclusion: { in: ISSUING_BANKS }
   validates :issue_data, presence: true
   validates :issue_date, presence: true
   validates :due_date, presence: true
@@ -56,14 +56,14 @@ class Boleto < ApplicationRecord
   validates :fee_amount, numericality: { allow_nil: true }
   validates :protest_days, numericality: { only_integer: true, greater_than: 0, less_than: 91, allow_nil: true }
   validates :negativation_days, numericality: { only_integer: true, greater_than: 0, less_than: 91, allow_nil: true }
-  validates :negativation_agency, allow_nil: true, inclusion: { in: NEGATIVATION_AGENCY_ENUM }
+  validates :negativation_agency, allow_nil: true, inclusion: { in: NEGATIVATION_AGENCIES }
   validates :receipt_days_limit, numericality: { only_integer: true, greater_than: 0, less_than: 91, allow_nil: true }
-  validates :boleto_type_code, inclusion: { in: BOLETO_TYPE_CODE_ENUM.values }
+  validates :boleto_type_code, inclusion: { in: BOLETO_TYPE_CODES.values }
   validates :boleto_type_description, length: { maximum: 255 }
-  validates :beneficiary_type, presence: true, inclusion: { in: DOCUMENT_TYPE_ENUM }
+  validates :beneficiary_type, presence: true, inclusion: { in: DOCUMENT_TYPES }
   validates :beneficiary_document, presence: true, length: { in: 14..18 }
   validates :beneficiary_name, presence: true, length: { in: 3..255 }
-  validates :payer_type, inclusion: { in: DOCUMENT_TYPE_ENUM }
+  validates :payer_type, inclusion: { in: DOCUMENT_TYPES }
   validates :payer_document, presence: true, length: { in: 14..18 }
   validates :payer_name, presence: true, length: { in: 3..255 }
   validates :payer_address, presence: true, length: { in: 3..255 }
