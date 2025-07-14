@@ -1,11 +1,25 @@
 class V1::BoletosController < ApplicationController
-  before_action :set_boleto, only: %i[ show update destroy ]
+  before_action :set_boleto, only: %i[ show update destroy register ]
 
   # GET /api/v1/boletos
   def index
     @boletos = Boleto.all
 
     render json: @boletos
+  end
+
+  # GET /api/v1/boletos/conciliation
+  def conciliation
+    # TODO: Implement conciliation logic here
+    # For now, returns ok status
+    render json: { status: 'conciliation_completed' }
+  end
+
+  # GET /api/v1/boletos/:id/register
+  def register
+    # TODO: Implement register logic here
+    # For now, returns the updated boleto
+    render json: @boleto
   end
 
   # GET /api/v1/boletos/1

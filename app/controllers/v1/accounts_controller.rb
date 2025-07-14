@@ -31,6 +31,7 @@ class V1::AccountsController < ApplicationController
 
   def destroy
     @account.destroy!
+    head :no_content
   end
 
   private
