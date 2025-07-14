@@ -31,6 +31,11 @@ module BankingGatewayRuby
     # Only loads a smaller set of middleware suitable for API only apps.
     config.api_only = true
 
+    # Add session middleware for Sidekiq::Web
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore, key: '_banking_gateway_session'
+    config.middleware.use ActionDispatch::Flash
+
     # Rails generate files
     config.generators do |g|
       g.test_framework nil
