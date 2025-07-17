@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+  include JsonFormatting
+
   class UnauthorizedError < ActionController::ActionControllerError; end
 
   rescue_from UnauthorizedError do

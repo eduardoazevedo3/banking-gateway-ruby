@@ -4,28 +4,28 @@ class V1::AccountsController < ApplicationController
   def index
     @accounts = Account.all
 
-    render json: @accounts
+    render_formatted_json @accounts
   end
 
   def show
-    render json: @account
+    render_formatted_json @account
   end
 
   def create
     @account = Account.new(account_params)
 
     if @account.save
-      render json: @account, status: :created
+      render_formatted_json @account, status: :created
     else
-      render json: @account.errors, status: :unprocessable_entity
+      render_formatted_json @account.errors, status: :unprocessable_entity
     end
   end
 
   def update
     if @account.update(account_params)
-      render json: @account
+      render_formatted_json @account
     else
-      render json: @account.errors, status: :unprocessable_entity
+      render_formatted_json @account.errors, status: :unprocessable_entity
     end
   end
 

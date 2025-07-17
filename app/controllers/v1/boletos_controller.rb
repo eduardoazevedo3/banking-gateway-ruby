@@ -5,26 +5,26 @@ class V1::BoletosController < ApplicationController
   def index
     @boletos = Boleto.all
 
-    render json: @boletos
+    render_formatted_json @boletos
   end
 
   # GET /api/v1/boletos/conciliation
   def conciliation
     # TODO: Implement conciliation logic here
     # For now, returns ok status
-    render json: { status: 'conciliation_completed' }
+    render_formatted_json { status: 'conciliation_completed' }
   end
 
   # GET /api/v1/boletos/:id/register
   def register
     # TODO: Implement register logic here
     # For now, returns the updated boleto
-    render json: @boleto
+    render_formatted_json @boleto
   end
 
   # GET /api/v1/boletos/1
   def show
-    render json: @boleto
+    render_formatted_json @boleto
   end
 
   # POST /api/v1/boletos
@@ -33,18 +33,18 @@ class V1::BoletosController < ApplicationController
     @boleto.account = current_account
 
     if @boleto.save
-      render json: @boleto, status: :created
+      render_formatted_json @boleto, status: :created
     else
-      render json: @boleto.errors, status: :unprocessable_entity
+      render_formatted_json @boleto.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /api/v1/boletos/1
   def update
     if @boleto.update(boleto_params)
-      render json: @boleto
+      render_formatted_json @boleto
     else
-      render json: @boleto.errors, status: :unprocessable_entity
+      render_formatted_json @boleto.errors, status: :unprocessable_entity
     end
   end
 
