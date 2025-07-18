@@ -1,10 +1,16 @@
 class V1::AccountsController < ApplicationController
+  include CursorPagination
+
   before_action :set_account, only: %i[ show update destroy ]
 
   def index
-    @accounts = Account.all
+    accounts = paginate_with_cursor(
+      Account.all,
+      cursor_field: :id,
+      limit: params[:limit]&.to_i || 100
+    )
 
-    render_formatted_json @accounts
+    render_formatted_json accounts
   end
 
   def show
