@@ -75,7 +75,7 @@ module JsonFormatting
   end
 
   def render_formatted_json(data, options = {})
-    formatted_data = format_response(data)
-    render json: formatted_data, **options
+    # formatted_data = format_response(data)
+    render json: data, **options
   end
 end
