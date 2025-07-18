@@ -12,7 +12,7 @@ class V1::BoletosController < ApplicationController
   def conciliation
     # TODO: Implement conciliation logic here
     # For now, returns ok status
-    render_formatted_json { status: 'conciliation_completed' }
+    render status: 'conciliation_completed'
   end
 
   # GET /api/v1/boletos/:id/register
