@@ -11,13 +11,13 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.0].define(version: 2024_12_01_010903) do
-  create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.string "provider_account_id", limit: 64, null: false, collation: "utf8mb4_0900_ai_ci"
-    t.string "reference_code", limit: 64, collation: "utf8mb4_0900_ai_ci"
-    t.string "description", null: false, collation: "utf8mb4_0900_ai_ci"
-    t.string "document_type", limit: 10, null: false, collation: "utf8mb4_0900_ai_ci"
-    t.string "document_number", limit: 50, null: false, collation: "utf8mb4_0900_ai_ci"
-    t.text "credentials", collation: "utf8mb4_0900_ai_ci"
+  create_table "accounts", charset: "utf8mb4", force: :cascade do |t|
+    t.string "provider_account_id", limit: 64, null: false
+    t.string "reference_code", limit: 64
+    t.string "description", null: false
+    t.string "document_type", limit: 10, null: false
+    t.string "document_number", limit: 50, null: false
+    t.text "credentials"
     t.json "issue_data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -25,13 +25,13 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_01_010903) do
     t.index ["provider_account_id"], name: "idx_accounts_provider_account_id", unique: true
   end
 
-  create_table "boletos", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+  create_table "boletos", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "account_id", null: false
-    t.string "covenant_id", limit: 64, null: false, collation: "utf8mb4_0900_ai_ci"
-    t.string "reference_code", limit: 64, collation: "utf8mb4_0900_ai_ci"
-    t.string "our_number", limit: 64, null: false, collation: "utf8mb4_0900_ai_ci"
-    t.string "status", limit: 50, default: "PENDING", null: false, collation: "utf8mb4_0900_ai_ci"
-    t.string "issuing_bank", limit: 50, null: false, collation: "utf8mb4_0900_ai_ci"
+    t.string "covenant_id", limit: 64, null: false
+    t.string "reference_code", limit: 64
+    t.string "our_number", limit: 64, null: false
+    t.string "status", limit: 50, default: "PENDING", null: false
+    t.string "issuing_bank", limit: 50, null: false
     t.json "issue_data", null: false
     t.date "issue_date", null: false
     t.date "due_date", null: false
@@ -46,27 +46,27 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_01_010903) do
     t.decimal "received_amount", precision: 10, scale: 2
     t.integer "protest_days"
     t.integer "negativation_days"
-    t.string "negativation_agency", collation: "utf8mb4_0900_ai_ci"
+    t.string "negativation_agency"
     t.integer "receipt_days_limit"
-    t.string "boleto_type_code", collation: "utf8mb4_0900_ai_ci"
-    t.string "boleto_type_description", limit: 50, collation: "utf8mb4_0900_ai_ci"
-    t.string "beneficiary_type", null: false, collation: "utf8mb4_0900_ai_ci"
-    t.string "beneficiary_document", null: false, collation: "utf8mb4_0900_ai_ci"
-    t.string "beneficiary_name", null: false, collation: "utf8mb4_0900_ai_ci"
-    t.string "payer_type", null: false, collation: "utf8mb4_0900_ai_ci"
-    t.string "payer_document", null: false, collation: "utf8mb4_0900_ai_ci"
-    t.string "payer_name", null: false, collation: "utf8mb4_0900_ai_ci"
-    t.string "payer_address", null: false, collation: "utf8mb4_0900_ai_ci"
-    t.string "payer_address_number", limit: 20, null: false, collation: "utf8mb4_0900_ai_ci"
-    t.string "payer_zip_code", null: false, collation: "utf8mb4_0900_ai_ci"
-    t.string "payer_city", null: false, collation: "utf8mb4_0900_ai_ci"
-    t.string "payer_neighborhood", null: false, collation: "utf8mb4_0900_ai_ci"
-    t.string "payer_state", null: false, collation: "utf8mb4_0900_ai_ci"
-    t.string "payer_phone", null: false, collation: "utf8mb4_0900_ai_ci"
-    t.text "rejection_reason", collation: "utf8mb4_0900_ai_ci"
-    t.string "barcode", limit: 64, collation: "utf8mb4_0900_ai_ci"
-    t.string "digitable_line", limit: 64, collation: "utf8mb4_0900_ai_ci"
-    t.string "billing_contract_number", limit: 64, collation: "utf8mb4_0900_ai_ci"
+    t.string "boleto_type_code"
+    t.string "boleto_type_description", limit: 50
+    t.string "beneficiary_type", null: false
+    t.string "beneficiary_document", null: false
+    t.string "beneficiary_name", null: false
+    t.string "payer_type", null: false
+    t.string "payer_document", null: false
+    t.string "payer_name", null: false
+    t.string "payer_address", null: false
+    t.string "payer_address_number", limit: 20, null: false
+    t.string "payer_zip_code", null: false
+    t.string "payer_city", null: false
+    t.string "payer_neighborhood", null: false
+    t.string "payer_state", null: false
+    t.string "payer_phone", null: false
+    t.text "rejection_reason"
+    t.string "barcode", limit: 64
+    t.string "digitable_line", limit: 64
+    t.string "billing_contract_number", limit: 64
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "registered_at"

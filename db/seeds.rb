@@ -7,3 +7,12 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+100.times do |i|
+  Account.create(
+    provider_account_id: i,
+    description: FFaker::Name.name.gsub(/[^a-zA-ZÀ-ÿ0-9\s]/, ''),
+    document_type: "CPF",
+    document_number: i.to_s.rjust(14, '0')
+  )
+end
