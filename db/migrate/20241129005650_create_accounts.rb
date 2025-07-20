@@ -1,7 +1,7 @@
 class CreateAccounts < ActiveRecord::Migration[8.0]
   def change
     create_table :accounts do |t|
-      t.string :provider_account_id, null: false, limit: 64
+      t.string :provider_account_id, limit: 64
       t.string :reference_code, limit: 64
       t.string :description, null: false, limit: 255
       t.string :document_type, null: false, limit: 10

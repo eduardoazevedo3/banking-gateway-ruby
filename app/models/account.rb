@@ -2,7 +2,7 @@ class Account < ApplicationRecord
   DOCUMENT_TYPE_ENUM = %w[ CPF CNPJ ].freeze
 
   validates :provider_account_id, uniqueness: true
-  validates :provider_account_id, presence: true, length: { maximum: 64 }, format: { with: REGEX_ALPHANUMERIC_WITH_DOTS }
+  validates :provider_account_id, allow_nil: true, length: { maximum: 64 }, format: { with: REGEX_ALPHANUMERIC_WITH_DOTS }
   validates :reference_code, allow_nil: true, length: { maximum: 64 }, format: { with: REGEX_ALPHANUMERIC_WITH_DOTS }
   validates :description, presence: true, length: { in: 3..255 }, format: { with: REGEX_BUSINESS_NAME }
   validates :document_type, presence: true, length: { maximum: 10 }, inclusion: { in: DOCUMENT_TYPE_ENUM }

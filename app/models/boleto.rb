@@ -1,9 +1,4 @@
 class Boleto < ApplicationRecord
-  BOLETO_STATUS = %w[
-    PENDING REGISTERING FAILED OPENED
-    PAID CANCELED EXPIRED REJECTED
-  ].freeze
-
   NEGATIVATION_AGENCIES = %w[ SERASA ].freeze
   ISSUING_BANKS = %w[ BANCO_BRASIL ].freeze
   DOCUMENT_TYPES = %w[ CPF CNPJ ].freeze
@@ -39,12 +34,21 @@ class Boleto < ApplicationRecord
     OTHERS: '99'
   }.freeze
 
+  enum :status, {
+    pending: 'PENDING',
+    registering: 'REGISTERING',
+    failed: 'FAILED',
+    opened: 'OPENED',
+    paid: 'PAID',
+    canceled: 'CANCELED',
+    expired: 'EXPIRED'
+  }
+
   belongs_to :account
 
   validates :covenant_id, presence: true, length: { maximum: 64 }, format: { with: REGEX_ALPHANUMERIC_WITH_DOTS }
   validates :reference_code, allow_nil: true, length: { maximum: 64 }, format: { with: REGEX_REFERENCE_CODE }, uniqueness: { scope: :account_id }
   validates :our_number, presence: true, length: { maximum: 64 }, format: { with: REGEX_NUMBERS_ONLY }, uniqueness: { scope: %i[ covenant_id account_id ] }
-  validates :status, presence: true, length: { maximum: 50 }, inclusion: { in: BOLETO_STATUS }
   validates :issuing_bank, presence: true, length: { maximum: 50 }, inclusion: { in: ISSUING_BANKS }
   validates :issue_data, presence: true
   validates :issue_date, presence: true

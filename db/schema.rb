@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema[8.0].define(version: 2024_12_01_010903) do
   create_table "accounts", charset: "utf8mb4", force: :cascade do |t|
-    t.string "provider_account_id", limit: 64, null: false
+    t.string "provider_account_id", limit: 64
     t.string "reference_code", limit: 64
     t.string "description", null: false
     t.string "document_type", limit: 10, null: false
