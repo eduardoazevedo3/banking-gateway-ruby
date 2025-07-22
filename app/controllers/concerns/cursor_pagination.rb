@@ -13,9 +13,9 @@ module CursorPagination
       decoded_cursor = decode_cursor(cursor)
 
       if direction == 'desc'
-        relation = relation.where("#{cursor_field} < ?", decoded_cursor)
+        relation = relation.where(relation.arel_table[cursor_field].lt(decoded_cursor))
       else
-        relation = relation.where("#{cursor_field} > ?", decoded_cursor)
+        relation = relation.where(relation.arel_table[cursor_field].gt(decoded_cursor))
       end
     end
 
