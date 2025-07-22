@@ -4,13 +4,17 @@ class V1::AccountsController < ApplicationController
   before_action :set_account, only: %i[ show update destroy ]
 
   def index
-    accounts = paginate_with_cursor(
-      Account.all,
+    accounts = Account
+      .by_provider_account_id(params[:provider_account_id])
+      .by_reference_code(params[:reference_code])
+
+    paginated_accounts = paginate_with_cursor(
+      accounts,
       cursor_field: :id,
       limit: params[:limit]&.to_i || 100
     )
 
-    render_formatted_json accounts
+    render_formatted_json paginated_accounts
   end
 
   def show

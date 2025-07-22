@@ -11,6 +11,14 @@ class Account < ApplicationRecord
 
   squishize :description, :document_number
 
+  scope :by_provider_account_id, ->(provider_account_id) do
+    where(provider_account_id:) if provider_account_id.present?
+  end
+
+  scope :by_reference_code, ->(reference_code) do
+    where(reference_code:) if reference_code.present?
+  end
+
   def as_json
     super except: %i[credentials]
   end

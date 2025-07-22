@@ -10,8 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_01_010903) do
-  create_table "accounts", charset: "utf8mb4", force: :cascade do |t|
+ActiveRecord::Schema[8.0].define(version: 2025_07_22_172926) do
+  create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "provider_account_id", limit: 64
     t.string "reference_code", limit: 64
     t.string "description", null: false
@@ -23,9 +23,10 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_01_010903) do
     t.datetime "updated_at", null: false
     t.index ["provider_account_id", "document_type", "document_number"], name: "idx_accounts_provider_account_document_type_number", unique: true
     t.index ["provider_account_id"], name: "idx_accounts_provider_account_id", unique: true
+    t.index ["reference_code"], name: "index_accounts_on_reference_code", unique: true
   end
 
-  create_table "boletos", charset: "utf8mb4", force: :cascade do |t|
+  create_table "boletos", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "account_id", null: false
     t.string "covenant_id", limit: 64, null: false
     t.string "reference_code", limit: 64
