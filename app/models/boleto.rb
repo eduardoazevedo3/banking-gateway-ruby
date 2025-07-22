@@ -1,4 +1,6 @@
 class Boleto < ApplicationRecord
+  include DocumentValidate
+
   NEGATIVATION_AGENCIES = %w[ SERASA ].freeze
   ISSUING_BANKS = %w[ BANCO_BRASIL ].freeze
   DOCUMENT_TYPES = %w[ CPF CNPJ ].freeze
@@ -65,10 +67,14 @@ class Boleto < ApplicationRecord
   validates :boleto_type_code, allow_nil: true, inclusion: { in: BOLETO_TYPE_CODES.values }
   validates :boleto_type_description, allow_nil: true, length: { maximum: 50 }
   validates :beneficiary_type, presence: true, inclusion: { in: DOCUMENT_TYPES }
-  validates :beneficiary_document, presence: true, length: { in: 14..18 }, format: { with: REGEX_DOCUMENTATION }
+  validates :beneficiary_document, presence: true, format: { with: REGEX_DOCUMENTATION }
+  validates :beneficiary_document, length: { is: 14 }, if: -> { beneficiary_type == 'CPF' }
+  validates :beneficiary_document, length: { is: 18 }, if: -> { beneficiary_type == 'CNPJ' }
   validates :beneficiary_name, presence: true, length: { in: 3..255 }, format: { with: REGEX_BUSINESS_NAME }
   validates :payer_type, presence: true, inclusion: { in: DOCUMENT_TYPES }
-  validates :payer_document, presence: true, length: { in: 14..18 }, format: { with: REGEX_DOCUMENTATION }
+  validates :payer_document, presence: true, format: { with: REGEX_DOCUMENTATION }
+  validates :payer_document, length: { is: 14 }, if: -> { payer_type == 'CPF' }
+  validates :payer_document, length: { is: 18 }, if: -> { payer_type == 'CNPJ' }
   validates :payer_name, presence: true, length: { in: 3..255 }, format: { with: REGEX_BUSINESS_NAME }
   validates :payer_address, presence: true, length: { in: 3..255 }
   validates :payer_address_number, presence: true, length: { in: 1..20 }
@@ -82,4 +88,6 @@ class Boleto < ApplicationRecord
   validates :barcode, length: { maximum: 64 }
   validates :digitable_line, length: { maximum: 64 }
   validates :billing_contract_number, length: { maximum: 64 }
+
+  document_validate :beneficiary_document, :payer_document
 end
