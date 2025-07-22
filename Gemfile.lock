@@ -96,6 +96,11 @@ GEM
     drb (2.2.3)
     erb (5.0.2)
     erubi (1.13.1)
+    factory_bot (6.5.4)
+      activesupport (>= 6.1.0)
+    factory_bot_rails (6.5.0)
+      factory_bot (~> 6.5)
+      railties (>= 6.1.0)
     ffaker (2.24.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -297,6 +302,7 @@ DEPENDENCIES
   brakeman
   debug
   dotenv-rails
+  factory_bot_rails (~> 6.5)
   ffaker
   mysql2 (~> 0.5)
   puma (>= 5.0)
