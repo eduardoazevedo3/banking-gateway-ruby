@@ -13,6 +13,6 @@
     provider_account_id: i,
     description: FFaker::Name.name.gsub(/[^a-zA-ZÀ-ÿ0-9\s]/, ''),
     document_type: "CPF",
-    document_number: i.to_s.rjust(14, '0')
+    document_number: FFaker::IdentificationBR.cpf.gsub(/(\d{3})(\d{3})(\d{3})(\d{2})/, '\1.\2.\3-\4')
   )
 end
