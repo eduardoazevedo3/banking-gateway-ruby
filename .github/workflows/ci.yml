@@ -6,9 +6,21 @@ on:
   pull_request:
 
 jobs:
-  scan_ruby:
+  setup:
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+  scan_ruby:
+    needs: setup
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -23,6 +35,7 @@ jobs:
         run: bin/brakeman --no-pager
 
   lint:
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -38,8 +51,8 @@ jobs:
         run: bin/rubocop -f github
 
   test:
+    needs: setup
     runs-on: ubuntu-latest
-
     services:
       mysql:
         image: mysql
@@ -48,12 +61,6 @@ jobs:
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-
-      # redis:
-      #   image: redis
-      #   ports:
-      #     - 6379:6379
-      #   options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
       - name: Install packages
@@ -68,8 +75,10 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Run tests
+      - name: Prepare DB and Run tests
         env:
           RAILS_ENV: test
           DATABASE_URL: mysql2://root@127.0.0.1:3306
-        run: bundle exec rspec
+        run: |
+          bundle exec rails db:test:prepare
+          bundle exec rspec
