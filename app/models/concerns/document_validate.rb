@@ -43,12 +43,16 @@ module DocumentValidate
 
     if digits.length == 11 && !invalid_cpfs.include?(digits.join)
       digits = digits.map(&:to_i)
-      sum1 = (10 * digits[0]) + (9 * digits[1]) + (8 * digits[2]) + (7 * digits[3]) + (6 * digits[4]) + (5 * digits[5]) + (4 * digits[6]) + (3 * digits[7]) + (2 * digits[8])
+      sum1 = (10 * digits[0]) + (9 * digits[1]) + (8 * digits[2]) + (7 * digits[3]) + (6 * digits[4]) +
+        (5 * digits[5]) + (4 * digits[6]) + (3 * digits[7]) + (2 * digits[8])
+
       sum1 = sum1 - (11 * (sum1 / 11))
       check_digit1 = (sum1 == 0 || sum1 == 1) ? 0 : 11 - sum1
 
       if check_digit1 == digits[9]
-        sum2 = (digits[0] * 11) + (digits[1] * 10) + (digits[2] * 9) + (digits[3] * 8) + (digits[4] * 7) + (digits[5] * 6) + (digits[6] * 5) + (digits[7] * 4) + (digits[8] * 3) + (digits[9] * 2)
+        sum2 = (digits[0] * 11) + (digits[1] * 10) + (digits[2] * 9) + (digits[3] * 8) + (digits[4] * 7) +
+          (digits[5] * 6) + (digits[6] * 5) + (digits[7] * 4) + (digits[8] * 3) + (digits[9] * 2)
+
         sum2 = sum2 - (11 * (sum2 / 11))
         check_digit2 = (sum2 == 0 || sum2 == 1) ? 0 : 11 - sum2
 
@@ -69,12 +73,16 @@ module DocumentValidate
 
     if digits.length == 14 && !invalid_cnpjs.include?(digits.join)
       digits = digits.map(&:to_i)
-      sum1 = digits[0]*5 + digits[1]*4 + digits[2]*3 + digits[3]*2 + digits[4]*9 + digits[5]*8 + digits[6]*7 + digits[7]*6 + digits[8]*5 + digits[9]*4 + digits[10]*3 + digits[11]*2
+      sum1 = digits[0]*5 + digits[1]*4 + digits[2]*3 + digits[3]*2 + digits[4]*9 + digits[5]*8 + digits[6]*7 +
+        digits[7]*6 + digits[8]*5 + digits[9]*4 + digits[10]*3 + digits[11]*2
+
       sum1 = sum1 - (11 * (sum1 / 11))
       check_digit1 = (sum1 == 0 || sum1 == 1) ? 0 : 11 - sum1
 
       if check_digit1 == digits[12]
-        sum2 = digits[0]*6 + digits[1]*5 + digits[2]*4 + digits[3]*3 + digits[4]*2 + digits[5]*9 + digits[6]*8 + digits[7]*7 + digits[8]*6 + digits[9]*5 + digits[10]*4 + digits[11]*3 + digits[12]*2
+        sum2 = digits[0]*6 + digits[1]*5 + digits[2]*4 + digits[3]*3 + digits[4]*2 + digits[5]*9 + digits[6]*8 +
+          digits[7]*7 + digits[8]*6 + digits[9]*5 + digits[10]*4 + digits[11]*3 + digits[12]*2
+
         sum2 = sum2 - (11 * (sum2 / 11))
         check_digit2 = (sum2 == 0 || sum2 == 1) ? 0 : 11 - sum2
 
