@@ -2,3 +2,4 @@ en:
   errors:
     messages:
       invalid_date: "is not a valid date"
+      document_number_length: "must be 14 or 18 characters"
