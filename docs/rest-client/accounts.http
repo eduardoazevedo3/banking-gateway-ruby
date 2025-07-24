@@ -17,7 +17,7 @@ content-type: application/json
   "provider_account_id": 1,
   "description": "Sacador Cobrancas S.A",
   "document_type": "CPF",
-  "document_number": "123.456.789-092",
+  "document_number": "404.782.851-32",
   "credentials": "{\"appKey\":\"A001\",\"clientId\":\"1234\",\"clientSecret\":\"abc1234\"}"
 }
 
