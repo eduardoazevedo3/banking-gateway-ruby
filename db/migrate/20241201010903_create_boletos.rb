@@ -46,7 +46,6 @@ class CreateBoletos < ActiveRecord::Migration[8.0]
       t.timestamps
       t.datetime :registered_at
 
-      t.index :account_id, name: 'idx_boletos_account_id'
       t.index %i[account_id covenant_id our_number], unique: true, name: 'idx_boletos_account_id_covenant_id_our_number'
       t.index %i[account_id reference_code], unique: true, name: 'idx_boletos_account_id_reference_code'
     end

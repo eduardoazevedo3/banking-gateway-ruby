@@ -73,7 +73,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_22_172926) do
     t.datetime "registered_at"
     t.index ["account_id", "covenant_id", "our_number"], name: "idx_boletos_account_id_covenant_id_our_number", unique: true
     t.index ["account_id", "reference_code"], name: "idx_boletos_account_id_reference_code", unique: true
-    t.index ["account_id"], name: "idx_boletos_account_id"
     t.index ["account_id"], name: "index_boletos_on_account_id"
   end
 
