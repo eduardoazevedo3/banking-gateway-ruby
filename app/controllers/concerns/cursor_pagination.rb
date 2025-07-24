@@ -36,8 +36,9 @@ module CursorPagination
     # Generate previous cursor (if applicable)
     prev_cursor = nil
     if cursor.present? && records.any?
-      first_record = records.first
-      prev_cursor = encode_cursor(first_record.send(cursor_field))
+      decoded_cursor = decode_cursor(cursor)
+      prev_cursor_value = decoded_cursor.to_i - limit
+      prev_cursor = encode_cursor(prev_cursor_value) if prev_cursor_value > 0
     end
 
     {
