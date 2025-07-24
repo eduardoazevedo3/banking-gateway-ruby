@@ -90,4 +90,8 @@ class Boleto < ApplicationRecord
   validates :billing_contract_number, length: { maximum: 64 }
 
   document_validate :beneficiary_document, :payer_document
+
+  scope :by_reference_code, ->(reference_code) do
+    where(reference_code:) if reference_code.present?
+  end
 end

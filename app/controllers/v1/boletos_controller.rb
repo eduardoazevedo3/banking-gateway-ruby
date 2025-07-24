@@ -2,9 +2,11 @@ class V1::BoletosController < ApplicationController
   before_action :set_boleto, only: %i[ show update destroy register ]
 
   def index
-    @boletos = Boleto.all
+    boletos = Boleto.by_reference_code(params[:reference_code])
 
-    render_formatted_json @boletos
+    limit = params[:limit]&.to_i || 100
+
+    render_formatted_json paginate_with_cursor(boletos, limit:)
   end
 
   def conciliation

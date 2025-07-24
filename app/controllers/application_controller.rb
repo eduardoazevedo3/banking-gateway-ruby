@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+  include CursorPagination
   include JsonFormatting
 
   class UnauthorizedError < ActionController::ActionControllerError; end
