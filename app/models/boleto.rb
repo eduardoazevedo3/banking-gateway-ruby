@@ -93,7 +93,7 @@ class Boleto < ApplicationRecord
 
   after_commit :send_boleto_webhook, on: %i[ create update ]
 
-  scope :by_reference_code, ->(reference_code) do
+  add_scope :by_reference_code do |reference_code|
     where(reference_code:) if reference_code.present?
   end
 
