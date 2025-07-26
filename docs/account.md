@@ -11,3 +11,5 @@ As contas neste projeto são a representação das contas dos clientes nos prove
 | document_number     | string   | Documento da pessoa ou empresa                               |
 | credentials         | text     | Dados de integração com provedor (CLIENT_ID, CLIENT_SECRET)  |
 | issue_data          | json     | Dados de convênio, carteira, modalidade, etc                 |
+| webhook_url         | string   | URL do webhook para receber atualizações de boleto           |
+| webhook_secret      | string   | Chave secreta para assinar a mensagem do webhook             |

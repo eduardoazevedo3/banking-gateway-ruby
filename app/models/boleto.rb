@@ -91,7 +91,15 @@ class Boleto < ApplicationRecord
 
   document_validate :beneficiary_document, :payer_document
 
+  after_commit :send_boleto_webhook, on: %i[ create update ]
+
   scope :by_reference_code, ->(reference_code) do
     where(reference_code:) if reference_code.present?
+  end
+
+  private
+
+  def send_boleto_webhook
+    SendBoletoWebhookJob.perform_later(id)
   end
 end
