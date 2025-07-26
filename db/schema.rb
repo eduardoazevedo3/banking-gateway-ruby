@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_22_172926) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_25_200654) do
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "provider_account_id", limit: 64
     t.string "reference_code", limit: 64
@@ -19,6 +19,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_22_172926) do
     t.string "document_number", limit: 50, null: false
     t.text "credentials"
     t.json "issue_data"
+    t.string "webhook_url"
+    t.string "webhook_secret"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["provider_account_id", "document_type", "document_number"], name: "idx_accounts_provider_account_document_type_number", unique: true

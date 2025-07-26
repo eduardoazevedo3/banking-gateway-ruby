@@ -51,7 +51,9 @@ class V1::AccountsController < ApplicationController
       :description,
       :document_type,
       :document_number,
-      :credentials
+      :credentials,
+      :webhook_url,
+      :webhook_secret
     )
   end
 end
