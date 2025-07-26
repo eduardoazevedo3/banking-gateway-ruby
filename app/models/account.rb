@@ -19,11 +19,11 @@ class Account < ApplicationRecord
 
   squishize :description, :document_number
 
-  scope :by_provider_account_id, ->(provider_account_id) do
+  add_scope :by_provider_account_id do |provider_account_id|
     where(provider_account_id:) if provider_account_id.present?
   end
 
-  scope :by_reference_code, ->(reference_code) do
+  add_scope :by_reference_code do |reference_code|
     where(reference_code:) if reference_code.present?
   end
 
