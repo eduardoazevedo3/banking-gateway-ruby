@@ -17,6 +17,8 @@ module DocumentValidate
 
   def validate_document(attribute)
     document_number = send(attribute)
+
+    return if document_number.blank?
     return errors.add(attribute, :document_number_length) unless valid_document_length?(document_number)
 
     if document_number.length == 14

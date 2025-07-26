@@ -12,6 +12,8 @@ class Account < ApplicationRecord
   validates :document_number, length: { is: 14 }, if: -> { document_type == 'CPF' }
   validates :document_number, length: { is: 18 }, if: -> { document_type == 'CNPJ' }
   validates :document_number, uniqueness: { scope: %i[ document_type provider_account_id ] }
+  validates :webhook_url, allow_nil: true, length: { maximum: 255 }, format: { with: REGEX_URL }
+  validates :webhook_secret, allow_nil: true, length: { minimum: 8, maximum: 255 }
 
   document_validate :document_number
 
@@ -26,6 +28,6 @@ class Account < ApplicationRecord
   end
 
   def as_json
-    super except: %i[credentials]
+    super except: %i[credentials webhook_secret]
   end
 end

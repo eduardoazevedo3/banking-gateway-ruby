@@ -5,5 +5,7 @@ FactoryBot.define do
     description { FFaker::Company.name.gsub(/[^#{REGEX_BUSINESS_NAME}]/, '') }
     document_type { 'CPF' }
     document_number { FFaker::IdentificationBR.cpf.gsub(/(\d{3})(\d{3})(\d{3})(\d{2})/, '\1.\2.\3-\4') }
+    webhook_url { FFaker::Internet.http_url }
+    webhook_secret { FFaker::Internet.password }
   end
 end

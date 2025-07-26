@@ -9,3 +9,4 @@ REGEX_PHONE_NUMBER = /\A\(\d{2}\) 9?\d{4}-\d{4}\z/
 REGEX_REFERENCE_CODE = /\A[A-Z0-9-]+\z/
 REGEX_STATE_CODE = /\A[A-Z]+\z/
 REGEX_UUID = /\A[a-zA-Z0-9\-]+\z/
+REGEX_URL = /\Ahttps?:\/\/[^\s\/$.?#].[^\s]*\z/i
