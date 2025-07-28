@@ -12,24 +12,24 @@ class V1::AccountsController < ApplicationController
   end
 
   def show
-    render_formatted_json @account
+    render_formatted_json account: @account
   end
 
   def create
     @account = Account.new(account_params)
 
     if @account.save
-      render_formatted_json @account, status: :created
+      render_formatted_json account: @account, status: :created
     else
-      render_formatted_json @account.errors, status: :unprocessable_entity
+      render_validation_error_json @account
     end
   end
 
   def update
     if @account.update(account_params)
-      render_formatted_json @account
+      render_formatted_json account: @account
     else
-      render_formatted_json @account.errors, status: :unprocessable_entity
+      render_validation_error_json @account
     end
   end
 
