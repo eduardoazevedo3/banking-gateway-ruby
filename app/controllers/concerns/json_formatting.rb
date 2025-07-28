@@ -78,4 +78,8 @@ module JsonFormatting
     # formatted_data = format_response(data)
     render json: data, **options
   end
+
+  def render_validation_error_json(record, status: :unprocessable_entity)
+    render json: { errors: record.errors, error_messages: record.errors.full_messages, status: }, status:
+  end
 end

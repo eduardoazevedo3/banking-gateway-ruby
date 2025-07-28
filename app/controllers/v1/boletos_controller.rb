@@ -18,11 +18,11 @@ class V1::BoletosController < ApplicationController
   def register
     # TODO: Implement register logic here
     # For now, returns the updated boleto
-    render_formatted_json @boleto
+    render_formatted_json boleto: @boleto
   end
 
   def show
-    render_formatted_json @boleto
+    render_formatted_json boleto: @boleto
   end
 
   def create
@@ -30,17 +30,17 @@ class V1::BoletosController < ApplicationController
     @boleto.account = current_account
 
     if @boleto.save
-      render_formatted_json @boleto, status: :created
+      render_formatted_json boleto: @boleto, status: :created
     else
-      render_formatted_json @boleto.errors, status: :unprocessable_entity
+      render_validation_error_json @boleto
     end
   end
 
   def update
     if @boleto.update(boleto_params)
-      render_formatted_json @boleto
+      render_formatted_json boleto: @boleto
     else
-      render_formatted_json @boleto.errors, status: :unprocessable_entity
+      render_validation_error_json @boleto
     end
   end
 
