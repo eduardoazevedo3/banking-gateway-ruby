@@ -49,8 +49,10 @@ class Boleto < ApplicationRecord
   belongs_to :account
 
   validates :covenant_id, presence: true, length: { maximum: 64 }, format: { with: REGEX_ALPHANUMERIC_WITH_DOTS }
-  validates :reference_code, allow_nil: true, length: { maximum: 64 }, format: { with: REGEX_REFERENCE_CODE }, uniqueness: { scope: :account_id }
-  validates :our_number, presence: true, length: { maximum: 64 }, format: { with: REGEX_NUMBERS_ONLY }, uniqueness: { scope: %i[ covenant_id account_id ] }
+  validates :reference_code, allow_nil: true, length: { maximum: 64 }, format: { with: REGEX_REFERENCE_CODE }
+  validates :reference_code, uniqueness: { scope: :account_id }, if: -> { reference_code.present? }
+  validates :our_number, presence: true, length: { maximum: 64 }, format: { with: REGEX_NUMBERS_ONLY }
+  validates :our_number, uniqueness: { scope: %i[ covenant_id account_id ] }, if: -> { our_number.present? }
   validates :issuing_bank, presence: true, length: { maximum: 50 }, inclusion: { in: ISSUING_BANKS }
   validates :issue_data, presence: true
   validates :issue_date, presence: true
