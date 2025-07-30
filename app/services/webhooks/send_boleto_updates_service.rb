@@ -19,7 +19,7 @@ class Webhooks::SendBoletoUpdatesService < Webhooks::BaseWebhookService
     signature = generate_signature(body)
 
     conn.post do |req|
-      req.body = body
+      req.body = body.to_json
       req.headers['X-Signature'] = signature if signature.present?
     end
   rescue StandardError => e

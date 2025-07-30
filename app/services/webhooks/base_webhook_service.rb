@@ -10,7 +10,8 @@ class Webhooks::BaseWebhookService < ApplicationService
   def generate_signature(body)
     return if account.webhook_secret.blank?
 
-    OpenSSL::HMAC.hexdigest('SHA256', account.webhook_secret, body)
+    json = body.is_a?(Hash) ? body.to_json : body
+    OpenSSL::HMAC.hexdigest('SHA256', account.webhook_secret, json)
   end
 
   def conn
