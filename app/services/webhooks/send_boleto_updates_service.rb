@@ -15,7 +15,7 @@ class Webhooks::SendBoletoUpdatesService < Webhooks::BaseWebhookService
   attr_reader :boleto, :account
 
   def send_boleto_webhook!
-    body = boleto.to_json
+    body = { boleto: boleto.as_json }
     signature = generate_signature(body)
 
     conn.post do |req|
