@@ -42,6 +42,7 @@ class Boleto < ApplicationRecord
     failed: 'FAILED',
     opened: 'OPENED',
     paid: 'PAID',
+    unpaid_closed: 'UNPAID_CLOSED',
     canceled: 'CANCELED',
     expired: 'EXPIRED'
   }
