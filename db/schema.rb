@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_25_200654) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_10_012224) do
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "provider_account_id", limit: 64
     t.string "reference_code", limit: 64
@@ -78,5 +78,24 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_25_200654) do
     t.index ["account_id"], name: "index_boletos_on_account_id"
   end
 
+  create_table "contacts", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.string "full_name", null: false
+    t.string "document_type", null: false
+    t.string "document_number", null: false
+    t.string "email"
+    t.string "phone"
+    t.string "zip_code"
+    t.string "address"
+    t.string "address_number"
+    t.string "city"
+    t.string "neighborhood"
+    t.string "state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_contacts_on_account_id"
+  end
+
   add_foreign_key "boletos", "accounts"
+  add_foreign_key "contacts", "accounts"
 end
