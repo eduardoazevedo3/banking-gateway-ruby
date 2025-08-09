@@ -3,6 +3,9 @@ class Account < ApplicationRecord
 
   DOCUMENT_TYPE_ENUM = %w[ CPF CNPJ ].freeze
 
+  has_many :boletos, dependent: :restrict_with_error
+  has_many :contacts, dependent: :restrict_with_error
+
   validates :provider_account_id, uniqueness: true
   validates :provider_account_id, allow_nil: true, length: { maximum: 64 }, format: { with: REGEX_ALPHANUMERIC_WITH_DOTS }
   validates :reference_code, allow_nil: true, length: { maximum: 64 }, format: { with: REGEX_ALPHANUMERIC_WITH_DOTS }

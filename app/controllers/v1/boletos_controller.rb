@@ -2,7 +2,7 @@ class V1::BoletosController < ApplicationController
   before_action :set_boleto, only: %i[ show update destroy register ]
 
   def index
-    boletos = Boleto.by_reference_code(params[:reference_code])
+    boletos = current_account.boletos.by_reference_code(params[:reference_code])
 
     limit = params[:limit]&.to_i || 100
 
@@ -46,15 +46,14 @@ class V1::BoletosController < ApplicationController
 
   def destroy
     @boleto.destroy!
+
+    head :no_content
   end
 
   private
 
   def set_boleto
-    @boleto = Boleto.find_by!(
-      account_id: current_account.id,
-      id: params[:id]
-    )
+    @boleto = current_account.boletos.find(params.expect(:id))
   end
 
   def boleto_params
