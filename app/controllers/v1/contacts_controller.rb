@@ -14,8 +14,7 @@ class V1::ContactsController < ApplicationController
   end
 
   def create
-    @contact = Contact.new(contact_params)
-    @contact.account = current_account
+    @contact = current_account.contacts.new(contact_params)
 
     if @contact.save
       render_formatted_json contact: @contact, status: :created

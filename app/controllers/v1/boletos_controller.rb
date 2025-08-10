@@ -26,8 +26,7 @@ class V1::BoletosController < ApplicationController
   end
 
   def create
-    @boleto = Boleto.new(boleto_params)
-    @boleto.account = current_account
+    @boleto = current_account.boletos.new(boleto_params)
 
     if @boleto.save
       render_formatted_json boleto: @boleto, status: :created
