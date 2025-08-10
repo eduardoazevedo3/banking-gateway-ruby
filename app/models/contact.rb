@@ -13,4 +13,8 @@ class Contact < ApplicationRecord
   validates :city, length: { in: 3..255 }
   validates :neighborhood, length: { in: 3..255 }
   validates :state, length: { is: 2 }, format: { with: REGEX_STATE_CODE }
+
+  add_scope :by_reference_code do |reference_code|
+    where(reference_code:) if reference_code.present?
+  end
 end

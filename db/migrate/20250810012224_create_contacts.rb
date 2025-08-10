@@ -2,6 +2,7 @@ class CreateContacts < ActiveRecord::Migration[8.0]
   def change
     create_table :contacts do |t|
       t.references :account, null: false, foreign_key: true
+      t.string :reference_code
       t.string :full_name, null: false
       t.string :document_type, null: false
       t.string :document_number, null: false
@@ -15,6 +16,8 @@ class CreateContacts < ActiveRecord::Migration[8.0]
       t.string :state
 
       t.timestamps
+
+      t.index %i[ account_id reference_code ], unique: true
     end
   end
 end

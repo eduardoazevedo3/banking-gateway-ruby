@@ -80,6 +80,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_10_012224) do
 
   create_table "contacts", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "account_id", null: false
+    t.string "reference_code"
     t.string "full_name", null: false
     t.string "document_type", null: false
     t.string "document_number", null: false
@@ -93,6 +94,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_10_012224) do
     t.string "state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["account_id", "reference_code"], name: "index_contacts_on_account_id_and_reference_code", unique: true
     t.index ["account_id"], name: "index_contacts_on_account_id"
   end
 
